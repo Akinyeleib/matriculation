@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS matriculation (
+    id int primary key auto incremented,
+    name varchar(50),
+    dob date,
+    gender varchar(6),
+    faculty varchar(6),
+    department varchar(6),
+    admissionYear int(4),
+    matricNo varchar(12)
+);
