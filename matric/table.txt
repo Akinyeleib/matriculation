@@ -1,10 +1,23 @@
-CREATE TABLE IF NOT EXISTS matriculation (
-    id int primary key auto incremented,
+CREATE TABLE IF NOT EXISTS Faculty (
+    id int primary key auto_increment,
+    name varchar(50)
+);
+
+CREATE TABLE IF NOT EXISTS Department (
+    id int primary key auto_increment,
+    name varchar(50),
+    facultyID int, 
+    FOREIGN key(id) REFERENCES Faculty(ID)
+);
+
+CREATE TABLE IF NOT EXISTS Matriculation (
+    id int primary key auto_increment,
     name varchar(50),
     dob date,
     gender varchar(6),
     faculty varchar(6),
-    department varchar(6),
-    admissionYear int(4),
+    department int, 
+    FOREIGN key(id) REFERENCES Department(ID),
+    admissionYear int,
     matricNo varchar(12)
 );
