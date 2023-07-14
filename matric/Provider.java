@@ -1,5 +1,9 @@
 package matric;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,7 +13,11 @@ public interface Provider {
 
     Statement st = createStatement();
 
-    String createTable = "";
+    String createTableQuery = readFile("matric/table.txt");
+
+    public static void main(String[] args) {
+        System.out.println(createTableQuery);
+    }
 
     static boolean executeQuery(String query) {
         try {
@@ -33,6 +41,24 @@ public interface Provider {
             System.out.println("Error occured: " + e.getMessage());
         }
         return st;
+    }
+
+    static String readFile(String file) {
+        String readLines = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                readLines = readLines != null ? readLines += line : line;
+                readLines +="\n";
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("FNF-Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IOError: " + e.getMessage());
+        }
+        return readLines;
     }
     
 }
