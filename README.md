@@ -1,10 +1,10 @@
-"# matriculation" 
+##Matriculation 
 
 The information that needs to be stored in a computerized matriculation registration number system will vary depending on the specific needs of the institution. However, some common pieces of information that may be stored include:
 
--[x] The student's name
--[x] The student's date of birth
--[x] The student's gender
+[x] The student's name
+[x] The student's date of birth
+[x] The student's gender
 [x] The student's faculty
 [x] The student's department
 [x] The student's year of admission
