@@ -4,6 +4,7 @@ import static matric.Components.createButton;
 import static matric.Components.createComboBox;
 import static matric.Components.createLabel;
 import static matric.Components.createTextField;
+import static matric.Components.reloadComboBoxItems;
 import static matric.Provider.fetchDepartments;
 
 import java.awt.Color;
@@ -80,10 +81,11 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
             index++;
 
             if (box == faculty) {
+                List <String> list = fetchDepartments(index);
+                reloadComboBoxItems(department, list);
                 System.out.println("Faculty selected is: " + index);
             }
             else if (box == department) {
-                List <String> list = fetchDepartments(index);
                 System.out.println("Department selected is: " + index);
             }
 
