@@ -52,14 +52,21 @@ public interface Components {
         JLabel label = new JLabel(txt);
         label.setFont(font);
         label.setForeground(fgColor);
+        label.setBackground(bgColor);
+        label.setOpaque(true);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         return label;
     }
     
-    public static JComboBox createComboBox(Object [] comboBoxItems, ItemListener itemListener) {
+    public static JComboBox<Object> createComboBox(Object [] comboBoxItems, ItemListener itemListener) {
         JComboBox<Object> comboBox = new JComboBox<>();
+        
+        comboBox.setFont(font);
+        comboBox.setForeground(fgColor);
+        comboBox.setBackground(bgColor);
         comboBox.removeAllItems();
+
         for (Object obj: comboBoxItems) {
             comboBox.addItem(obj);
         }
