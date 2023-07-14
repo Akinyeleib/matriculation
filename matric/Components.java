@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -73,6 +74,16 @@ public interface Components {
         comboBox.addItemListener(itemListener);
 
         return comboBox;
+    }
+
+    public static void reloadComboBoxItems(JComboBox<String> comboBox, List <String> comboBoxItems) {
+        
+        comboBox.removeAllItems();
+
+        for (String obj: comboBoxItems) {
+            comboBox.addItem(obj);
+        }
+
     }
 
 }
