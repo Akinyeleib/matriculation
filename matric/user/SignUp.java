@@ -1,5 +1,10 @@
 package matric.user;
 
+import static matric.Components.createButton;
+import static matric.Components.createComboBox;
+import static matric.Components.createLabel;
+import static matric.Components.createTextField;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,10 +13,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
-import matric.Components;
 
 public class SignUp extends JFrame implements ActionListener, ItemListener {
     
+    JComboBox<String> faculty, department;
+
     public SignUp() {
 
         JPanel panel = new JPanel();
@@ -19,36 +25,33 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         GridLayout grid = new GridLayout();
         panel.setLayout(grid);
 
-        panel.add(Components.createLabel("First Name"));
-        JTextField fname = Components.createTextField();
+        panel.add(createLabel("First Name"));
+        JTextField fname = createTextField();
         panel.add(fname);
         
-        panel.add(Components.createLabel("Last Name"));
-        JTextField lname = Components.createTextField();
+        panel.add(createLabel("Last Name"));
+        JTextField lname = createTextField();
         panel.add(lname);
 
-        panel.add(Components.createLabel("Faculty"));
+        panel.add(createLabel("Faculty"));
         // faculty -> dropdown
         String [] faculties = {"Science", "Engineering", "Environmental", "Education"};
-        var faculty = Components.createComboBox(faculties, this);
+        faculty = createComboBox(faculties, this);
         panel.add(faculty);
 
-        // department -> dropdown
-
-        panel.add(Components.createLabel("Department"));
+        panel.add(createLabel("Department"));
         // department -> dropdown
         String [] departments = {"Physics", "CVE", "Urban & Regional Planning", "Childhood Education"};
-        var department = Components.createComboBox(departments, this);
+        department = createComboBox(departments, this);
         panel.add(department);
-
         
         grid.setColumns(2);
         grid.setRows(7);
         grid.setHgap(5);
         grid.setVgap(10);
 
-        panel.add(Components.createButton("Reset", this));
-        panel.add(Components.createButton("Submit", this));
+        panel.add(createButton("Reset", this));
+        panel.add(createButton("Submit", this));
         
         add(panel);
 
@@ -57,6 +60,7 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         setVisible(true);
         pack();
         setLocationRelativeTo(null);
+
     }
 
     @Override
@@ -66,7 +70,23 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        System.out.println("Item Event");
+        
+        if (e.getSource() instanceof JComboBox) {
+
+            JComboBox<String> box = (JComboBox<String>) e.getSource();
+            int index = box.getSelectedIndex();
+            index++;
+
+            if (box == faculty) {
+                System.out.println("Faculty selected is: " + index);
+            }
+            else if (box == department) {
+                // List <String> = 
+                System.out.println("Department selected is: " + index);
+            }
+
+        }
+        
     }
 
     public static void main(String[] args) {

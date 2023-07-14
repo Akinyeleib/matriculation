@@ -59,15 +59,15 @@ public interface Components {
         return label;
     }
     
-    public static JComboBox<Object> createComboBox(Object [] comboBoxItems, ItemListener itemListener) {
-        JComboBox<Object> comboBox = new JComboBox<>();
+    public static JComboBox<String> createComboBox(String [] comboBoxItems, ItemListener itemListener) {
+        JComboBox<String> comboBox = new JComboBox<>();
         
         comboBox.setFont(font);
         comboBox.setForeground(fgColor);
         comboBox.setBackground(bgColor);
         comboBox.removeAllItems();
 
-        for (Object obj: comboBoxItems) {
+        for (String obj: comboBoxItems) {
             comboBox.addItem(obj);
         }
         comboBox.addItemListener(itemListener);
@@ -76,3 +76,4 @@ public interface Components {
     }
 
 }
+
