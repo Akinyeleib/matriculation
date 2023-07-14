@@ -43,7 +43,7 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
 
         
         grid.setColumns(2);
-        grid.setRows(5);
+        grid.setRows(7);
         grid.setHgap(5);
         grid.setVgap(10);
 
