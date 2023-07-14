@@ -5,9 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Provider {
+public interface Provider {
 
-    public static Statement createStatement() {
+    Statement st = createStatement();
+
+    String createTable = "";
+
+    static boolean executeQuery(String query) {
+        try {
+            return st.execute(query);
+        } catch (SQLException e) {
+            System.out.println("Error: Occured");
+        }
+        return false;
+    }
+
+    static Statement createStatement() {
         String user = "root", password = "root",
         url = "jdbc:mysql://localhost:3306/matriculation";
         Statement st = null;
