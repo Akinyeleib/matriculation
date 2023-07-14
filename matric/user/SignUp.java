@@ -17,7 +17,6 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
         GridLayout grid = new GridLayout();
-        grid.setColumns(2);
         panel.setLayout(grid);
 
         panel.add(Components.createLabel("First Name"));
@@ -35,6 +34,18 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         panel.add(faculty);
 
         // department -> dropdown
+
+        panel.add(Components.createLabel("Department"));
+        // department -> dropdown
+        String [] departments = {"Physics", "CVE", "Urban & Regional Planning", "Childhood Education"};
+        var department = Components.createComboBox(departments, this);
+        panel.add(department);
+
+        
+        grid.setColumns(2);
+        grid.setRows(5);
+        grid.setHgap(5);
+        grid.setVgap(10);
 
         panel.add(Components.createButton("Reset", this));
         panel.add(Components.createButton("Submit", this));
