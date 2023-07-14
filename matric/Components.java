@@ -3,8 +3,10 @@ package matric;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -53,6 +55,17 @@ public interface Components {
         label.setHorizontalAlignment(JLabel.CENTER);
 
         return label;
-    } 
+    }
+    
+    public static JComboBox createComboBox(Object [] comboBoxItems, ItemListener itemListener) {
+        JComboBox<Object> comboBox = new JComboBox<>();
+        comboBox.removeAllItems();
+        for (Object obj: comboBoxItems) {
+            comboBox.addItem(obj);
+        }
+        comboBox.addItemListener(itemListener);
+
+        return comboBox;
+    }
 
 }
