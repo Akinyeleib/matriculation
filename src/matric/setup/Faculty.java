@@ -14,6 +14,7 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
 
     JTextField fname;
     Statement st;
+    JComboBox<String> faculty;
     
     public Faculty() {
 
@@ -31,13 +32,12 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
         panel.add(createButton("Add Faculty", this));
 
         // Remove Faculty
-        panel.add(createLabel("Delete Faculty"));
-        // faculty -> dropdown
-        String [] faculties = {"Science", "Engineering", "Environmental", "Education"};
+        panel.add(createLabel("Available Faculties"));
+
         List <String> list = fetchFaculties(st);
-        JComboBox<String> faculty = createComboBox(list, this);
+        faculty = createComboBox(list, this);
         panel.add(faculty);
-        panel.add(createButton("Add Faculty", this));
+        panel.add(createButton("Delete Faculty", this));
 
         grid.setColumns(2);
         grid.setRows(7);
@@ -60,7 +60,13 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
         if (clicked.equals("Add Faculty")) {
             String query = String.format("INSERT INTO Faculty (name) VALUES ('%S')", fname.getText());
             executeQuery(query, st);
-            System.out.println("Faculty Added");
+            System.out.format("Faculty %s Added\n", fname.getText());
+            loadComboBox(fetchFaculties(st), faculty);
+        } else if (clicked.equals("Delete Faculty")) {
+            String query = String.format("DELETE FROM Faculty WHERE name = '%S'", faculty.getSelectedItem());
+            executeQuery(query, st);
+            System.out.format("Faculty %s Added\n", fname.getText());
+            loadComboBox(fetchFaculties(st), faculty);
         }
     }
 

@@ -66,14 +66,17 @@ public interface Components {
         comboBox.setFont(font);
         comboBox.setForeground(fgColor);
         comboBox.setBackground(bgColor);
-        comboBox.removeAllItems();
-
-        for (String obj: comboBoxItems) {
-            comboBox.addItem(obj);
-        }
+        loadComboBox(comboBoxItems, comboBox);
         comboBox.addItemListener(itemListener);
 
         return comboBox;
+    }
+
+    public static void loadComboBox(List<String> comboBoxItems, JComboBox<String> comboBox) {
+        comboBox.removeAllItems();
+        for (String obj: comboBoxItems) {
+            comboBox.addItem(obj);
+        }
     }
 
     public static void reloadComboBoxItems(JComboBox<String> comboBox, List <String> comboBoxItems) {
