@@ -60,7 +60,7 @@ public interface Components {
         return label;
     }
     
-    public static JComboBox<String> createComboBox(String [] comboBoxItems, ItemListener itemListener) {
+    public static JComboBox<String> createComboBox(List<String> comboBoxItems, ItemListener itemListener) {
         JComboBox<String> comboBox = new JComboBox<>();
         
         comboBox.setFont(font);
