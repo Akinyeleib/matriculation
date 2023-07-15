@@ -2,7 +2,6 @@ package matric.setup;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static matric.Components.*;
