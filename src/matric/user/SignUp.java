@@ -5,10 +5,12 @@ import static matric.Components.createComboBox;
 import static matric.Components.createLabel;
 import static matric.Components.createTextField;
 import static matric.Components.reloadComboBoxItems;
-import static matric.Provider.fetchDepartments;
+import static matric.setup.Provider.createStatement;
+import static matric.setup.Provider.fetchDepartments;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -21,8 +23,11 @@ import javax.swing.*;
 public class SignUp extends JFrame implements ActionListener, ItemListener {
     
     JComboBox<String> faculty, department;
+    Statement st;
 
     public SignUp() {
+
+        st = createStatement();
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
@@ -83,7 +88,7 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
             index++;
 
             if (box == faculty) {
-                List <String> list = fetchDepartments(index);
+                List <String> list = fetchDepartments(index, st);
                 reloadComboBoxItems(department, list);
                 System.out.println("Faculty selected is: " + index);
             }
