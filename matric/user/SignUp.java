@@ -9,6 +9,7 @@ import static matric.Provider.fetchDepartments;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,13 +40,14 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         panel.add(createLabel("Faculty"));
         // faculty -> dropdown
         String [] faculties = {"Science", "Engineering", "Environmental", "Education"};
-        faculty = createComboBox(faculties, this);
+        List <String> list = new ArrayList<>();
+        faculty = createComboBox(list, this);
         panel.add(faculty);
 
         panel.add(createLabel("Department"));
         // department -> dropdown
         String [] departments = {"Physics", "CVE", "Urban & Regional Planning", "Childhood Education"};
-        department = createComboBox(departments, this);
+        department = createComboBox(list, this);
         panel.add(department);
         
         grid.setColumns(2);
