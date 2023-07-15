@@ -1,4 +1,4 @@
-package matric;
+package matric.setup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +16,20 @@ import java.sql.Statement;
 
 public interface Provider {
 
-    Statement st = createStatement();
+    public static void createTables(Statement st) {
+        String createTableQuery = readFile("src/matric/table.txt");
 
-    String createTableQuery = readFile("matric/table.txt");
-
-    public static void createTables() {
         String [] splitted = createTableQuery.split(";\n");
         for (int i = splitted.length - 1; i >= 0; i--) {
-            executeQuery(splitted[i]);
+            executeQuery(splitted[i], st);
         }
     }
 
-    static boolean executeQuery(String query) {
+    static boolean executeQuery(String query, Statement st) {
         try {
             return st.execute(query);
         } catch (SQLException e) {
-            System.out.println("Error: Occured");
+            System.out.println("Error Occurred: " + e.getMessage());
         }
         return false;
     }
@@ -45,13 +43,15 @@ public interface Provider {
             System.out.println("Driver loaded");
             st = conn.createStatement();
             System.out.println("Statement created");
+            createTables(st);
+            System.out.println("Tables created");
         } catch (SQLException e) {
             System.out.println("Error occured: " + e.getMessage());
         }
         return st;
     }
 
-    static List<String> fetchDepartments(int ID) {
+    static List<String> fetchDepartments(int ID, Statement st) {
         String query = "SELECT name from DEPARTMENT WHERE FacultyID = " + ID;
         List <String> values = new ArrayList<>();
         try {
@@ -60,12 +60,12 @@ public interface Provider {
                 values.add(rs.getString(1));
             }
         } catch (SQLException e) {
-            System.out.println("Error occured: " + e.getMessage());
+            System.out.println("Error occurred: " + e.getMessage());
         }
         return values;
     }
 
-    static List<String> fetchFaculties() {
+    static List<String> fetchFaculties(Statement st) {
         String query = "SELECT name from FACULTY";
         List <String> values = new ArrayList<>();
         try {
