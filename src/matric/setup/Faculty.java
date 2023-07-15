@@ -2,16 +2,22 @@ package matric.setup;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Statement;
 import java.util.List;
 
 import static matric.Components.*;
-import static matric.Provider.*;
+import static matric.setup.Provider.*;
 
 import javax.swing.*;
 
 public class Faculty extends JFrame implements ActionListener, ItemListener {
+
+    JTextField fname;
+    Statement st;
     
     public Faculty() {
+
+        st = createStatement();
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
@@ -20,7 +26,7 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
 
         // Add Faculty
         panel.add(createLabel("Faculty Name"));
-        JTextField fname = createTextField();
+        fname = createTextField();
         panel.add(fname);
         panel.add(createButton("Add Faculty", this));
 
@@ -28,7 +34,7 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
         panel.add(createLabel("Delete Faculty"));
         // faculty -> dropdown
         String [] faculties = {"Science", "Engineering", "Environmental", "Education"};
-        List <String> list = fetchFaculties();
+        List <String> list = fetchFaculties(st);
         JComboBox<String> faculty = createComboBox(list, this);
         panel.add(faculty);
         panel.add(createButton("Add Faculty", this));
@@ -50,6 +56,12 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String clicked = e.getActionCommand();
+        if (clicked.equals("Add Faculty")) {
+            String query = String.format("INSERT INTO Faculty (name) VALUES ('%S')", fname.getText());
+            executeQuery(query, st);
+            System.out.println("Faculty Added");
+        }
     }
 
     @Override
