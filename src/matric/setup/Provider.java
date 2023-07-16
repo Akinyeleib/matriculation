@@ -21,7 +21,7 @@ public interface Provider {
 
         String [] splitted = createTableQuery.split(";\n");
         for (int i = 0; i < splitted.length; i++) {
-            boolean res = executeQuery(splitted[i], st);
+            executeQuery(splitted[i], st);
         }
     }
 

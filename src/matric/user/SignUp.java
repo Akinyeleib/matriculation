@@ -25,6 +25,8 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
     JComboBox<String> faculty, department;
     Statement st;
 
+
+
     public SignUp() {
 
         st = createStatement();
@@ -84,16 +86,15 @@ public class SignUp extends JFrame implements ActionListener, ItemListener {
         if (e.getSource() instanceof JComboBox) {
 
             JComboBox<String> box = (JComboBox<String>) e.getSource();
-            int index = box.getSelectedIndex();
-            index++;
+            String item = (String) box.getSelectedItem();
 
             if (box == faculty) {
-                List <String> list = fetchDepartments(index, st);
+                List <String> list = fetchDepartments(item, st);
                 reloadComboBoxItems(department, list);
-                System.out.println("Faculty selected is: " + index);
+                System.out.println("Faculty selected is: " + item);
             }
             else if (box == department) {
-                System.out.println("Department selected is: " + index);
+                System.out.println("Department selected is: " + item);
             }
 
         }
