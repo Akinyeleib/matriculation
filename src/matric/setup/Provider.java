@@ -20,8 +20,8 @@ public interface Provider {
         String createTableQuery = readFile("src/matric/table.txt");
 
         String [] splitted = createTableQuery.split(";\n");
-        for (int i = splitted.length - 1; i >= 0; i--) {
-            executeQuery(splitted[i], st);
+        for (int i = 0; i < splitted.length; i++) {
+            boolean res = executeQuery(splitted[i], st);
         }
     }
 
@@ -46,13 +46,13 @@ public interface Provider {
             createTables(st);
             System.out.println("Tables created");
         } catch (SQLException e) {
-            System.out.println("Error occured: " + e.getMessage());
+            System.out.println("Error occurred: " + e.getMessage());
         }
         return st;
     }
 
-    static List<String> fetchDepartments(int ID, Statement st) {
-        String query = "SELECT name from DEPARTMENT WHERE FacultyID = " + ID;
+    static List<String> fetchDepartments(String facultyName, Statement st) {
+        String query = String.format("SELECT name from DEPARTMENT WHERE FacultyID = (SELECT ID FROM DEPARTMENT WHERE NAME = '%s')", facultyName);
         List <String> values = new ArrayList<>();
         try {
             ResultSet rs = st.executeQuery(query);
@@ -77,6 +77,19 @@ public interface Provider {
             System.out.println("Error occured: " + e.getMessage());
         }
         return values;
+    }
+
+    static int getFacultyID(Statement st, String name) {
+        String query = String.format("SELECT ID from FACULTY WHERE name = '%s'", name);
+        try {
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred: " + e.getMessage());
+        }
+        return -1;
     }
 
     static String readFile(String file) {
