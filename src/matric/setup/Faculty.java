@@ -23,30 +23,27 @@ public class Faculty extends JFrame implements ActionListener, ItemListener {
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
         GridLayout grid = new GridLayout();
+        grid.setColumns(2);
+        grid.setRows(2);
+        grid.setHgap(5);
+        grid.setVgap(10);
         panel.setLayout(grid);
 
         // Add Faculty
-        panel.add(createLabel("Faculty Name"));
         fname = createTextField();
         panel.add(fname);
         panel.add(createButton("Add Faculty", this));
 
         // Remove Faculty
-        panel.add(createLabel("Available Faculties"));
-
         List <String> list = fetchFaculties(st);
         faculty = createComboBox(list, this);
         panel.add(faculty);
         panel.add(createButton("Delete Faculty", this));
 
-        grid.setColumns(2);
-        grid.setRows(7);
-        grid.setHgap(5);
-        grid.setVgap(10);
         
         add(panel);
 
-        setTitle("Register Student");
+        setTitle("Faculty");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         pack();
